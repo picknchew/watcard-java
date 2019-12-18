@@ -1,4 +1,4 @@
-group 'me.francochen.watcard'
+group 'com.francochen.watcard'
 version '1.0.0'
 
 apply plugin: 'java'
