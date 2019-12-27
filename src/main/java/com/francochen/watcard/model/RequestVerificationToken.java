@@ -8,6 +8,8 @@ public class RequestVerificationToken {
     @Selector(value = "input", index = VERIFY_TOKEN_INDEX, attr = "value")
     private String token;
 
+    private RequestVerificationToken() {}
+
     public String toString() {
         return token;
     }

@@ -1,19 +1,21 @@
 package com.francochen.watcard.model.balance;
 
-public class BalanceInfo {
-    private final String limit;
-    private final String balance;
+import java.math.BigDecimal;
 
-    BalanceInfo(String limit, String balance) {
+public class BalanceInfo {
+    private final BigDecimal limit;
+    private final BigDecimal balance;
+
+    BalanceInfo(BigDecimal limit, BigDecimal balance) {
         this.limit = limit;
         this.balance = balance;
     }
 
-    public String getLimit() {
+    public BigDecimal getLimit() {
         return limit;
     }
 
-    public String getBalance() {
+    public BigDecimal getBalance() {
         return balance;
     }
 }

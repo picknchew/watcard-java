@@ -5,6 +5,7 @@ import org.jsoup.nodes.Element;
 import pl.droidsonroids.jspoon.ElementConverter;
 import pl.droidsonroids.jspoon.annotation.Selector;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,8 +20,10 @@ public class BalancesConverter implements ElementConverter<Map<BalanceType, Bala
 
         for (Element row : node.children()) {
             BalanceType type = BalanceType.getById(row.child(ID_INDEX).html());
+            BigDecimal limit = new BigDecimal(row.child(LIMIT_INDEX).html().substring(1));
+            BigDecimal balance = new BigDecimal(row.child(AMOUNT_INDEX).html().substring(1));
 
-            balances.put(type, new BalanceInfo(row.child(LIMIT_INDEX).html(), row.child(AMOUNT_INDEX).html()));
+            balances.put(type, new BalanceInfo(limit, balance));
         }
 
         return balances;
