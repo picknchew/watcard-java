@@ -2,10 +2,12 @@ package com.francochen.watcard;
 
 import com.francochen.watcard.authentication.AuthenticationHandler;
 import com.francochen.watcard.authentication.AuthenticationInterceptor;
+import com.francochen.watcard.authentication.AuthenticationResponse;
 import com.francochen.watcard.model.PersonalInfo;
 import com.francochen.watcard.model.balance.Balances;
 import com.francochen.watcard.service.AuthenticationService;
 import com.francochen.watcard.service.WatCardService;
+import io.reactivex.Completable;
 import io.reactivex.Single;
 import okhttp3.OkHttpClient;
 import pl.droidsonroids.retrofit2.JspoonConverterFactory;
@@ -40,6 +42,11 @@ public final class WatCardClient {
                         .addInterceptor(new AuthenticationInterceptor(authHandler)).build())
                 .baseUrl(BASE_URL)
                 .build().create(WatCardService.class);
+    }
+
+    public Completable hasValidCredentials() {
+        return authHandler.renewSession()
+                .flatMapCompletable(authResponse -> Completable.complete());
     }
 
     public Single<Balances> getBalances() {
