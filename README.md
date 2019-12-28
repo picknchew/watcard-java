@@ -1,13 +1,13 @@
 # watcard-java
 
 ## Usage
-To begin, create an instance of WatCard API. You will need a separate
-instance for each individual WatCard as session cookies are stored.
-
-The session expires fairly quickly, so WatCardService#authenticate will need to be called fairly
-often in order for the other methods to work.
+To begin, create an instance of WatCardClient:
 
 ```
-WatCardAPI api = new WatCardAPI();
-WatCardService service = api.createService();
+WatCardClient client = new WatCardClient.Builder().account("account").pin("pin").build();
 ```
+
+Within WatCardClient, WatCardClient#hasValidCredentials, WatCardClient#getBalances and WatCardClient#getPersonalInfo
+can be used to retrieve information about the user.
+
+New sessions are automatically retrieved by the library when the last one expires.

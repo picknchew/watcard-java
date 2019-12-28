@@ -2,7 +2,6 @@ package com.francochen.watcard;
 
 import com.francochen.watcard.authentication.AuthenticationHandler;
 import com.francochen.watcard.authentication.AuthenticationInterceptor;
-import com.francochen.watcard.authentication.AuthenticationResponse;
 import com.francochen.watcard.model.PersonalInfo;
 import com.francochen.watcard.model.balance.Balances;
 import com.francochen.watcard.service.AuthenticationService;
