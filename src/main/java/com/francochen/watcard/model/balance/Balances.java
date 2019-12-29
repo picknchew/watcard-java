@@ -8,6 +8,8 @@ public class Balances {
     @Selector(value = "tbody", converter = BalancesConverter.class)
     private Map<BalanceType, BalanceInfo> balances;
 
+    private Balances() {}
+
     public BalanceInfo get(BalanceType type) {
         return balances.get(type);
     }

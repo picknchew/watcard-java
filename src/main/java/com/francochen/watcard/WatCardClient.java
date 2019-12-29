@@ -4,6 +4,8 @@ import com.francochen.watcard.authentication.AuthenticationHandler;
 import com.francochen.watcard.authentication.AuthenticationInterceptor;
 import com.francochen.watcard.model.PersonalInfo;
 import com.francochen.watcard.model.balance.Balances;
+import com.francochen.watcard.model.transaction.TransactionRequest;
+import com.francochen.watcard.model.transaction.Transactions;
 import com.francochen.watcard.service.AuthenticationService;
 import com.francochen.watcard.service.WatCardService;
 import io.reactivex.Completable;
@@ -54,6 +56,10 @@ public final class WatCardClient {
 
     public Single<PersonalInfo> getPersonalInfo() {
         return getTransformedSingle(watCardService::getPersonalInfo);
+    }
+
+    public Single<Transactions> getTransactions(TransactionRequest request) {
+        return getTransformedSingle(() -> watCardService.getTransactions(request));
     }
 
     private <T> Single<T> getTransformedSingle(Supplier<Single<Response<T>>> supplier) {
