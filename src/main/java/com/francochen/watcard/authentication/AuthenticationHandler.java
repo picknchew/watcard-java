@@ -11,8 +11,8 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
 public class AuthenticationHandler {
-    // in minutes
     private static final int DEFAULT_ACCOUNT_MODE = 0;
+    // in minutes
     private static final int SESSION_LIFETIME = 5;
     private static final int AUTH_SUCCESS_CODE = 302;
 
