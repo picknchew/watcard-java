@@ -28,7 +28,9 @@ public class TransactionsConverter implements ElementConverter<List<Transaction>
 
         for (Element row : node.children()) {
             LocalDateTime date = LocalDateTime.parse(row.child(DATE_INDEX).html(), FORMATTER);
-            BigDecimal amount = new BigDecimal(row.child(AMOUNT_INDEX).html().replace("$", ""));
+            BigDecimal amount = new BigDecimal(row.child(AMOUNT_INDEX).html()
+                    .replace("$", "")
+                    .replace(",", ""));
             BalanceType balanceType = BalanceType.getById(row.child(BALANCE_TYPE_INDEX).html());
             int units = Integer.parseInt(row.child(UNITS_INDEX).html());
             String transactionType = row.child(TRANSACTION_TYPE_INDEX).html();
