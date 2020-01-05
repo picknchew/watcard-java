@@ -7,9 +7,11 @@ import pl.droidsonroids.jspoon.ElementConverter;
 import pl.droidsonroids.jspoon.annotation.Selector;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TransactionsConverter implements ElementConverter<List<Transaction>> {
@@ -20,14 +22,26 @@ public class TransactionsConverter implements ElementConverter<List<Transaction>
     private static final int TRANSACTION_TYPE_INDEX = 4;
     private static final int TERMINAL_INDEX = 5;
 
-    private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MM/dd/yyyy h:mm:ss a");
+    private static final ThreadLocal<DateFormat> DATE_FORMAT = ThreadLocal
+            .withInitial(() -> new SimpleDateFormat("MM/dd/yyyy h:mm:ss a"));
 
     @Override
-    public List<Transaction> convert(@NotNull Element node, @NotNull Selector selector) {
+    public List<Transaction> convert(Element node, @NotNull Selector selector) {
         List<Transaction> transactions = new ArrayList<>();
 
+        if (node == null) {
+            return transactions;
+        }
+
         for (Element row : node.children()) {
-            LocalDateTime date = LocalDateTime.parse(row.child(DATE_INDEX).html(), FORMATTER);
+            Date date = null;
+
+            try {
+                date = DATE_FORMAT.get().parse(row.child(DATE_INDEX).html());
+            } catch (ParseException e) {
+                // should never happen
+            }
+
             BigDecimal amount = new BigDecimal(row.child(AMOUNT_INDEX).html()
                     .replace("$", "")
                     .replace(",", ""));

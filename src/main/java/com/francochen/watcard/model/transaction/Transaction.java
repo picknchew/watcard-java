@@ -3,19 +3,19 @@ package com.francochen.watcard.model.transaction;
 import com.francochen.watcard.model.balance.BalanceType;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Transaction {
-    private final LocalDateTime dateTime;
+    private final Date date;
     private final BigDecimal amount;
     private final BalanceType balanceType;
     private final int units;
     private final String transactionType;
     private final String terminal;
 
-    Transaction(LocalDateTime dateTime, BigDecimal amount, BalanceType balanceType,
+    Transaction(Date date, BigDecimal amount, BalanceType balanceType,
                 int units, String transactionType, String terminal) {
-        this.dateTime = dateTime;
+        this.date = date;
         this.amount = amount;
         this.balanceType = balanceType;
         this.units = units;
@@ -23,8 +23,8 @@ public class Transaction {
         this.terminal = terminal;
     }
 
-    public LocalDateTime getDateTime() {
-        return dateTime;
+    public Date getDate() {
+        return date;
     }
 
     public BigDecimal getAmount() {

@@ -35,7 +35,8 @@ public class AuthenticationHandler {
                         throw new AuthenticationException("Failed to retrieve verification token");
                     }
                 })
-                .flatMap(tokenResponse -> service.authenticate(account, pin, DEFAULT_ACCOUNT_MODE, tokenResponse.body(),
+                .flatMap(tokenResponse -> service.authenticate(
+                        new AuthenticationRequest(account, pin, DEFAULT_ACCOUNT_MODE, tokenResponse.body()),
                         HttpCookie.parse(tokenResponse.headers().get("Set-Cookie"))
                                 .stream()
                                 .map(Object::toString)
