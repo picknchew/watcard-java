@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class TransactionsConverter implements ElementConverter<List<Transaction>> {
     private static final int DATE_INDEX = 0;
@@ -23,7 +24,7 @@ public class TransactionsConverter implements ElementConverter<List<Transaction>
     private static final int TERMINAL_INDEX = 5;
 
     private static final ThreadLocal<DateFormat> DATE_FORMAT = ThreadLocal
-            .withInitial(() -> new SimpleDateFormat("MM/dd/yyyy h:mm:ss a"));
+            .withInitial(() -> new SimpleDateFormat("MM/dd/yyyy hh:mm:ss a", Locale.ENGLISH));
 
     @Override
     public List<Transaction> convert(Element node, @NotNull Selector selector) {
